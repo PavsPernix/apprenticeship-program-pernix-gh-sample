@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.rails
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    command: /bin/bash -c "cd backend && bundle exec rails server -b 0.0.0.0"
+    stdin_open: true
+    tty: true
+    environment:
+      - RAILS_ENV=development

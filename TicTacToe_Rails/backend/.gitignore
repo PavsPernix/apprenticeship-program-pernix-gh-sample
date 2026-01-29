@@ -1,0 +1,30 @@
+# Dependencies
+/vendor/bundle
+.bundle
+
+# Database
+/db/*.sqlite3
+/db/*.sqlite3-*
+
+# Logs
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+!/tmp/pids
+
+# Coverage
+/coverage
+
+# Environment variables
+/.env
+/.env.local
+
+# Master key for decrypting credentials
+/config/master.key
+
+# RSpec
+/spec/examples.txt
+
+# SimpleCov
+.coverage
