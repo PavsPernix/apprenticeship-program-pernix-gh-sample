@@ -49,15 +49,18 @@ end
 ### Solución
 ```ruby
 class EmailService
+  def initialize(email)
+    @email = email
+  end
+
   def send_confirmation_email
-    # Lógica para enviar un correo electrónico de confirmación
-    puts "Email enviado a customer@example.com"
+    puts "Email enviado a #{@email}"
   end
 end
 
 class OrderPrinter
-  def print_order
-    @items.each do |item|
+  def print_order(order)
+    order.items.each do |item|
       puts "Item: #{item.name} - Price: #{item.price}"
     end
   end
@@ -76,7 +79,7 @@ class DiscountPricing
 
   def calculate_total(items)
     total = items.sum(&:price)
-    total - (total*@discount)
+    total - (total * @discount)
   end
 end
 
@@ -100,4 +103,30 @@ class Item
     @price = price
   end
 end
+
+############ PRUEBA DE IMPLEMENTACION ###########
+# 1. Set values for items
+items = [
+  Item.new("Laptop", 1000),
+  Item.new("Mouse", 50),
+  Item.new("Keyboard", 100)
+]
+
+# 2. Create the order
+order = Order.new(items)
+
+# 3. Calculate the total
+pricing = DiscountPricing.new(0.1) # 10% discount
+total = order.calculate_total(pricing)
+
+puts "Total order price: #{total}"
+
+# 4. Send an email to the customer
+email_service = EmailService.new("customer@email.com")
+email_service.send_confirmation_email
+
+# 5. Print the order
+printer = OrderPrinter.new
+printer.print_order(order)
+
 ```
